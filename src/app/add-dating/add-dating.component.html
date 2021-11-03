@@ -1,0 +1,49 @@
+<h2 class="text-center text-light mt-3">Dating App</h2>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Add dating</h3>
+                    <form [formGroup]="ListOfDating">
+                        <h5 >Name</h5>
+                        <input type="text" formControlName="name" class="form-control form-control-lg form-group"
+                        placeholder="Name...">
+                        <span class="text-danger" *ngIf="ListOfDating.get('name')?.hasError('required') 
+                        && ListOfDating.get('name')?.touched">Write your <strong>name</strong></span>
+
+                        <h5 class="mt-2">Date</h5>
+                        <input type="date" formControlName="date" class="form-control form-control-lg form-group">
+                        <span class="text-danger" *ngIf="ListOfDating.get('date')?.hasError('required') 
+                        && ListOfDating.get('date')?.touched">Choose a <strong>date</strong></span>
+
+                        <h5 class="mt-2">Time</h5>
+                        <input type="time" formControlName="time" class="form-control form-control-lg form-group">
+                        <span class="text-danger" *ngIf="ListOfDating.get('time')?.hasError('required') 
+                        && ListOfDating.get('time')?.touched">choose a <strong>time</strong></span>
+
+                        <h5 class="mt-2">Symptoms</h5>
+                          <textarea class="form-control" formControlName="symptoms" placeholder="Leave your symptoms here" id="floatingTextarea2" style="height: 100px"></textarea>
+                          <span class="text-danger" *ngIf="ListOfDating.get('symptoms')?.hasError('required') 
+                        && ListOfDating.get('symptoms')?.touched">Write your <strong>Symptoms</strong></span>
+                    </form>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary mt-4" [disabled]="ListOfDating.invalid" (click)="SendInfo()" type="button">Add</button>
+                      </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card" *ngIf="DataOfDating.length === 0">
+                <div class="card-body">
+                    <h5 class="text-center">Don't there dating for show</h5>
+                </div>
+                
+            </div>
+            <app-list-of-dating [List]="DataOfDating" 
+                                (index)="removeValue($event)"></app-list-of-dating>
+        </div>
+    </div>
+</div>
